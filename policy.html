@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UDDoubleDee - นโยบาย</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+      <div class="page-loader__logo">
+        <img src="image/logonobg.png" alt="Loading..." />
+      </div>
+      <p class="page-loader__text">กำลังโหลด...</p>
+      <div class="page-loader__progress">
+        <div class="page-loader__progress-bar" id="loader-progress-bar"></div>
+      </div>
+      <span class="page-loader__percent" id="loader-percent">0%</span>
+    </div>
+
+    <img
+      src="/image/black_ribbon_top_right.png"
+      class="black-ribbon stick-top stick-right"
+      alt=""
+    />
+    <header class="site-header">
+      <a class="brand" href="" aria-label="รีเฟรชหน้าเว็บ" onclick="location.reload(); return false;">
+        <img class="brand__logo" src="image/logonobg.png" alt="UDDoubleDee" />
+        <span class="brand__name">UDDoubleDee</span>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="เมนูหลัก">
+          <a href="index.html">หน้าแรก</a>
+          <a href="member.html">สมาชิก</a>
+          <a href="policy.html">นโยบาย</a>
+          <a href="qa.html">Q&A</a>
+          <a href="contact.html">ติดต่อ</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="สลับโหมดกลางวันและกลางคืน"
+        >
+          <span class="theme-toggle__text" id="theme-text"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <h1 class="contact-hero__title">นโยบาย</h1>
+      <section class="policy-grid" aria-label="การ์ดนโยบายทั้งหมด">
+        <a class="policy-card" href="image/policy/52439_0.jpg" data-policy-image="image/policy/52439_0.jpg">
+          <img src="image/policy/52439_0.jpg" alt="นโยบาย 1" />
+        </a>
+        <a class="policy-card" href="image/policy/52440_0.jpg" data-policy-image="image/policy/52440_0.jpg">
+          <img src="image/policy/52440_0.jpg" alt="นโยบาย 2" />
+        </a>
+        <a class="policy-card" href="image/policy/52441_0.jpg" data-policy-image="image/policy/52441_0.jpg">
+          <img src="image/policy/52441_0.jpg" alt="นโยบาย 3" />
+        </a>
+        <a class="policy-card" href="image/policy/52442_0.jpg" data-policy-image="image/policy/52442_0.jpg">
+          <img src="image/policy/52442_0.jpg" alt="นโยบาย 4" />
+        </a>
+        <a class="policy-card" href="image/policy/52443_0.jpg" data-policy-image="image/policy/52443_0.jpg">
+          <img src="image/policy/52443_0.jpg" alt="นโยบาย 5" />
+        </a>
+        <a class="policy-card" href="image/policy/52444_0.jpg" data-policy-image="image/policy/52444_0.jpg">
+          <img src="image/policy/52444_0.jpg" alt="นโยบาย 6" />
+        </a>
+        <a class="policy-card" href="image/policy/52445_0.jpg" data-policy-image="image/policy/52445_0.jpg">
+          <img src="image/policy/52445_0.jpg" alt="นโยบาย 7" />
+        </a>
+        <a class="policy-card" href="image/policy/52446_0.jpg" data-policy-image="image/policy/52446_0.jpg">
+          <img src="image/policy/52446_0.jpg" alt="นโยบาย 8" />
+        </a>
+        <a class="policy-card" href="image/policy/52447_0.jpg" data-policy-image="image/policy/52447_0.jpg">
+          <img src="image/policy/52447_0.jpg" alt="นโยบาย 9" />
+        </a>
+        <a class="policy-card" href="image/policy/52448_0.jpg" data-policy-image="image/policy/52448_0.jpg">
+          <img src="image/policy/52448_0.jpg" alt="นโยบาย 10" />
+        </a>
+        <a class="policy-card" href="image/policy/52449_0.jpg" data-policy-image="image/policy/52449_0.jpg">
+          <img src="image/policy/52449_0.jpg" alt="นโยบาย 11" />
+        </a>
+        <a class="policy-card" href="image/policy/52450_0.jpg" data-policy-image="image/policy/52450_0.jpg">
+          <img src="image/policy/52450_0.jpg" alt="นโยบาย 12" />
+        </a>
+      </section>
+    </main>
+    <div class="policy-modal" id="policy-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="policy-modal__backdrop" data-policy-close></div>
+      <div class="policy-modal__content" role="document">
+        <button class="policy-modal__close" type="button" aria-label="ปิดภาพ" data-policy-close>
+          ✕
+        </button>
+        <img class="policy-modal__image" id="policy-modal-image" src="" alt="" />
+      </div>
+    </div>
+    <footer class="site-footer">
+        Copyright © 2026 UDDoubleDee. Student Council Udomdarunee School.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/loader.js"></script>
+    <script>
+      const policyModal = document.getElementById("policy-modal");
+      const policyModalImage = document.getElementById("policy-modal-image");
+      const policyCards = document.querySelectorAll(".policy-card");
+      const policyCloseTargets = policyModal.querySelectorAll("[data-policy-close]");
+
+      const openPolicyModal = (imageSrc, imageAlt) => {
+        policyModalImage.src = imageSrc;
+        policyModalImage.alt = imageAlt;
+        policyModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+      };
+
+      const closePolicyModal = () => {
+        policyModal.setAttribute("aria-hidden", "true");
+        policyModalImage.src = "";
+        policyModalImage.alt = "";
+        document.body.classList.remove("modal-open");
+      };
+
+      policyCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+          event.preventDefault();
+          const imageSrc = card.getAttribute("data-policy-image") || card.href;
+          const imageAlt = card.querySelector("img")?.alt || "นโยบาย";
+          openPolicyModal(imageSrc, imageAlt);
+        });
+      });
+
+      policyCloseTargets.forEach((target) => {
+        target.addEventListener("click", closePolicyModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && policyModal.getAttribute("aria-hidden") === "false") {
+          closePolicyModal();
+        }
+      });
+    </script>
+  </body>
+</html>

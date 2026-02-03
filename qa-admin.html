@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UDDoubleDee - Q&A Admin</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/qa.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+      <div class="page-loader__logo">
+        <img src="image/logonobg.png" alt="Loading..." />
+      </div>
+      <p class="page-loader__text">กำลังโหลด...</p>
+      <div class="page-loader__progress">
+        <div class="page-loader__progress-bar" id="loader-progress-bar"></div>
+      </div>
+      <span class="page-loader__percent" id="loader-percent">0%</span>
+    </div>
+
+    <img
+      src="/image/black_ribbon_top_right.png"
+      class="black-ribbon stick-top stick-right"
+      alt=""
+    />
+    <header class="site-header">
+      <a class="brand" href="" aria-label="รีเฟรชหน้าเว็บ" onclick="location.reload(); return false;">
+        <img class="brand__logo" src="image/logonobg.png" alt="UDDoubleDee" />
+        <span class="brand__name">UDDoubleDee</span>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="เมนูหลัก">
+          <a href="index.html">หน้าแรก</a>
+          <a href="member.html">สมาชิก</a>
+          <a href="policy.html">นโยบาย</a>
+          <a href="qa.html">Q&A</a>
+          <a href="contact.html">ติดต่อ</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="สลับโหมดกลางวันและกลางคืน"
+        >
+          <span class="theme-toggle__text" id="theme-text"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <!-- Admin Hero -->
+      <div class="qa-hero qa-hero--admin">
+        <h1 class="qa-hero__title">🛠️ จัดการคำถาม</h1>
+        <p class="qa-hero__subtitle">ตอบคำถามและจัดการระบบ Q&A</p>
+        <button class="qa-auth__logout" id="admin-logout" type="button">ออกจากระบบ</button>
+      </div>
+
+      <!-- Status Legend -->
+      <div class="qa-legend">
+        <div class="qa-legend__item">
+          <span class="status-dot status-dot--pending"></span>
+          <span>รอตอบ</span>
+        </div>
+        <div class="qa-legend__item">
+          <span class="status-dot status-dot--answered"></span>
+          <span>ตอบแล้ว</span>
+        </div>
+      </div>
+
+      <!-- Filter -->
+      <div class="qa-filter">
+        <button class="qa-filter__btn qa-filter__btn--active" data-filter="all">ทั้งหมด</button>
+        <button class="qa-filter__btn" data-filter="pending">รอตอบ</button>
+        <button class="qa-filter__btn" data-filter="answered">ตอบแล้ว</button>
+      </div>
+
+      <!-- Admin Questions List -->
+      <div class="qa-admin-list" id="qa-admin-list">
+        <!-- Questions will be loaded here -->
+      </div>
+      <p class="qa-list__empty" id="qa-admin-empty">ยังไม่มีคำถาม</p>
+    </main>
+
+    <footer class="site-footer">
+      Copyright © 2026 UDDoubleDee. Student Council Udomdarunee School.
+    </footer>
+
+    <!-- Answer Modal -->
+    <div class="qa-modal" id="answer-modal">
+      <div class="qa-modal__overlay"></div>
+      <div class="qa-modal__content qa-modal__content--large">
+        <button class="qa-modal__close" id="answer-modal-close">&times;</button>
+        <div class="qa-modal__header">
+          <span class="qa-modal__category" id="modal-category"></span>
+          <span class="qa-modal__date" id="modal-date"></span>
+        </div>
+        <div class="qa-modal__question-info">
+          <p class="qa-modal__author">จาก: <span id="modal-author"></span></p>
+          <p class="qa-modal__question-text" id="modal-question"></p>
+        </div>
+        <div class="qa-modal__answer-section">
+          <label class="qa-form__label" for="modal-answer">คำตอบ</label>
+          <textarea 
+            class="qa-form__textarea" 
+            id="modal-answer" 
+            rows="5" 
+            placeholder="พิมพ์คำตอบที่นี่..."
+          ></textarea>
+        </div>
+        <div class="qa-modal__actions">
+          <button class="qa-modal__btn qa-modal__btn--delete" id="answer-delete" style="display: none;">ลบคำถาม</button>
+          <div class="qa-modal__actions-right">
+            <button class="qa-modal__btn qa-modal__btn--cancel" id="answer-cancel">ยกเลิก</button>
+            <button class="qa-modal__btn qa-modal__btn--save" id="answer-save">บันทึกคำตอบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Auth Modal -->
+    <div class="qa-modal qa-modal--auth" id="admin-auth">
+      <div class="qa-modal__overlay"></div>
+      <div class="qa-modal__content qa-modal__content--auth">
+        <h2 class="qa-auth__title">เข้าสู่ระบบผู้ดูแล</h2>
+        <p class="qa-auth__subtitle">กรอกรหัสผ่านเพื่อจัดการระบบ Q&A</p>
+        <form id="admin-auth-form">
+          <label class="qa-form__label" for="admin-auth-password">รหัสผ่าน</label>
+          <input
+            class="qa-form__input"
+            id="admin-auth-password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="รหัสผ่านผู้ดูแล"
+            required
+          />
+          <p class="qa-auth__error" id="admin-auth-error"></p>
+          <button class="qa-form__submit" type="submit">ยืนยัน</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/qa-admin.js"></script>
+    <script src="js/loader.js"></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+/* Page Loader Styles */
+
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f9fbfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+body[data-theme="night"] .page-loader {
+  background: #0f1418;
+}
+
+.page-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Spinning Logo */
+.page-loader__logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 32px;
+  animation: spin 2s linear infinite;
+}
+
+.page-loader__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Text */
+.page-loader__text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2a30;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+body[data-theme="night"] .page-loader__text {
+  color: #e6edf2;
+}
+
+/* Progress Bar Container */
+.page-loader__progress {
+  width: 280px;
+  height: 8px;
+  background: #e0e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="night"] .page-loader__progress {
+  background: #2a353f;
+}
+
+/* Progress Bar Fill */
+.page-loader__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2c5f7c, #5ba3c4, #7ec8e3);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Percentage Text */
+.page-loader__percent {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c5f7c;
+}
+
+body[data-theme="night"] .page-loader__percent {
+  color: #7ec8e3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-loader__logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+  }
+
+  .page-loader__text {
+    font-size: 1rem;
+  }
+
+  .page-loader__progress {
+    width: 220px;
+    height: 6px;
+  }
+
+  .page-loader__percent {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-loader__logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+
+  .page-loader__text {
+    font-size: 0.95rem;
+  }
+
+  .page-loader__progress {
+    width: 180px;
+    height: 5px;
+  }
+
+  .page-loader__percent {
+    font-size: 1.1rem;
+  }
+}

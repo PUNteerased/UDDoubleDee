@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UDDoubleDee - ติดต่อเรา</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+      <div class="page-loader__logo">
+        <img src="image/logonobg.png" alt="Loading..." />
+      </div>
+      <p class="page-loader__text">กำลังโหลด...</p>
+      <div class="page-loader__progress">
+        <div class="page-loader__progress-bar" id="loader-progress-bar"></div>
+      </div>
+      <span class="page-loader__percent" id="loader-percent">0%</span>
+    </div>
+
+    <img
+      src="/image/black_ribbon_top_right.png"
+      class="black-ribbon stick-top stick-right"
+      alt=""
+    />
+    <header class="site-header">
+      <a class="brand" href="" aria-label="รีเฟรชหน้าเว็บ" onclick="location.reload(); return false;">
+        <img class="brand__logo" src="image/logonobg.png" alt="UDDoubleDee" />
+        <span class="brand__name">UDDoubleDee</span>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="เมนูหลัก">
+          <a href="index.html">หน้าแรก</a>
+          <a href="member.html">สมาชิก</a>
+          <a href="policy.html">นโยบาย</a>
+          <a href="qa.html">Q&A</a>
+          <a href="contact.html">ติดต่อ</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="สลับโหมดกลางวันและกลางคืน"
+        >
+          <span class="theme-toggle__text" id="theme-text"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="contact-hero">
+        <div class="contact-hero__icon">
+          <img src="image/logonobg.png" alt="UDDoubleDee" />
+        </div>
+        <h1 class="contact-hero__title">ติดต่อเรา</h1>
+        <p class="contact-hero__subtitle">
+          รวมช่องทางติดต่อหลักของสภานักเรียน UDDoubleDee
+        </p>
+      </section>
+
+      <!-- Contact Cards -->
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-card__icon">
+            <img src="image/line.png" alt="LINE" />
+          </div>
+          <h3 class="contact-card__title">LINE Official</h3>
+          <p class="contact-card__content">แชทสอบถามข้อมูลผ่าน LINE ได้ตลอด</p>
+          <a href="https://line.me/ti/p/@715dsjxs" target="_blank" rel="noopener" class="contact-card__link">
+            @715dsjxs
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card__icon">
+            <img src="image/instagram.png" alt="Instagram" />
+          </div>
+          <h3 class="contact-card__title">Instagram</h3>
+          <p class="contact-card__content">ติดตามข่าวสารและกิจกรรมผ่าน Instagram</p>
+          <a href="https://www.instagram.com/ud_double_dee/" target="_blank" rel="noopener" class="contact-card__link">
+            @ud_double_dee
+          </a>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="location-section">
+        <div class="location-section__header">
+          <h2 class="location-section__title">ที่ตั้งโรงเรียน</h2>
+          <p class="location-section__address">โรงเรียนอุดมดรุณี จังหวัดสุโขทัย</p>
+        </div>
+        <iframe
+          class="location-section__map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2697.751635231034!2d99.8208276365439!3d17.01400680497087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30de55d0f8bdd2dd%3A0xaca03a77b8ad6e0b!2sUdomdarunee%20School!5e0!3m2!1sen!2sus!4v1768636915842!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      Copyright © 2026 UDDoubleDee. Student Council Udomdarunee School.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/loader.js"></script>
+  </body>
+</html>

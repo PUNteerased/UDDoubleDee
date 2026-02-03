@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UDDoubleDee</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+      <div class="page-loader__logo">
+        <img src="image/logonobg.png" alt="Loading..." />
+      </div>
+      <p class="page-loader__text">กำลังโหลด...</p>
+      <div class="page-loader__progress">
+        <div class="page-loader__progress-bar" id="loader-progress-bar"></div>
+      </div>
+      <span class="page-loader__percent" id="loader-percent">0%</span>
+    </div>
+
+    <img
+      src="/image/black_ribbon_top_right.png"
+      class="black-ribbon stick-top stick-right"
+      alt=""
+    />
+    <header class="site-header">
+      <a class="brand" href="" aria-label="รีเฟรชหน้าเว็บ" onclick="location.reload(); return false;">
+        <img class="brand__logo" src="image/logonobg.png" alt="UDDoubleDee" />
+        <span class="brand__name">UDDoubleDee</span>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="เมนูหลัก">
+          <a href="index.html">หน้าแรก</a>
+          <a href="member.html">สมาชิก</a>
+          <a href="policy.html">นโยบาย</a>
+          <a href="qa.html">Q&A</a>
+          <a href="contact.html">ติดต่อ</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="สลับโหมดกลางวันและกลางคืน"
+        >
+          <span class="theme-toggle__text" id="theme-text"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <h1 class="contact-hero__title">UDDoubleDee</h1>
+
+      <section id="party-name" class="section info-section">
+        <h2 class="info-section__title">ความหมายของชื่อพรรค</h2>
+        <div class="info-section__content">
+          <p class="info-section__text">
+            UDDoubleDee คือการรวมพลังของนักเรียนที่พร้อม “ทำดีให้ดัง”
+            ด้วยความร่วมมือ ความคิดสร้างสรรค์ และความรับผิดชอบต่อส่วนรวม
+            เราเชื่อว่าความดีเล็ก ๆ เมื่อรวมกัน จะกลายเป็นพลังใหญ่ที่เปลี่ยนแปลงโรงเรียนได้จริง
+          </p>
+        </div>
+      </section>
+
+      <section id="logo-meaning" class="section info-section">
+        <h2 class="info-section__title">ความหมายของโลโก้</h2>
+        <div class="info-section__content">
+          <div class="info-section__logo">
+            <img src="image/logonobg.png" alt="โลโก้พรรค" />
+          </div>
+          <p class="info-section__text">
+            โลโก้สะท้อนความสดใสและความสามัคคีของนักเรียน UDDoubleDee
+            เส้นและสีที่กลมกลืนสื่อถึงการทำงานเป็นทีม
+            พร้อมเป้าหมายเดียวกันคือพัฒนาโรงเรียนให้น่าอยู่และทันสมัยยิ่งขึ้น
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      Copyright © 2026 UDDoubleDee. Student Council Udomdarunee School.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/loader.js"></script>
+  </body>
+</html>

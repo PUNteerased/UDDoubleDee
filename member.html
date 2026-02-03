@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UDDoubleDee - สมาชิก</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+      <div class="page-loader__logo">
+        <img src="image/logonobg.png" alt="Loading..." />
+      </div>
+      <p class="page-loader__text">กำลังโหลด...</p>
+      <div class="page-loader__progress">
+        <div class="page-loader__progress-bar" id="loader-progress-bar"></div>
+      </div>
+      <span class="page-loader__percent" id="loader-percent">0%</span>
+    </div>
+
+    <img
+      src="/image/black_ribbon_top_right.png"
+      class="black-ribbon stick-top stick-right"
+      alt=""
+    />
+    <header class="site-header">
+      <a class="brand" href="" aria-label="รีเฟรชหน้าเว็บ" onclick="location.reload(); return false;">
+        <img class="brand__logo" src="image/logonobg.png" alt="UDDoubleDee" />
+        <span class="brand__name">UDDoubleDee</span>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="เมนูหลัก">
+          <a href="index.html">หน้าแรก</a>
+          <a href="member.html">สมาชิก</a>
+          <a href="policy.html">นโยบาย</a>
+          <a href="qa.html">Q&A</a>
+          <a href="contact.html">ติดต่อ</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="สลับโหมดกลางวันและกลางคืน"
+        >
+          <span class="theme-toggle__text" id="theme-text"></span>
+        </button>
+      </div>
+    </header>
+    <main class="page">
+      <section id="members" class="section members-section">
+        <h2 class="members-title">คณะกรรมการนักเรียนพรรค UDDoubleDee</h2>
+
+        <!-- ประธาน -->
+        <h3 class="members-group-title">ประธานนักเรียน</h3>
+        <div class="members-grid members-grid--2"></div>
+        <div class="member-featured">
+          <div class="member-card member-card--president" 
+               data-nickname="เตย"
+               data-fullname="มนต์นภา ปีย์วราวงศ์"
+               data-position="ประธานนักเรียน"
+               data-birthday="01/09/2552"
+               data-class="ภาษาจีน"
+               data-ig="they1nonlytoey"
+               data-photo="image/member/เตย.jpg">
+            <div class="member-card__badge">ประธานนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/เตย.jpg" alt="ประธานนักเรียน" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">เตย</h3>
+              <p class="member-card__fullname">มนต์นภา ปีย์วราวงศ์</p>
+              <a class="member-card__ig" href="https://www.instagram.com/they1nonlytoey/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @they1nonlytoey
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- รองประธาน -->
+        <h3 class="members-group-title">รองประธานนักเรียน</h3>
+        <div class="members-grid members-grid--2">
+          <div class="member-card member-card--vice"
+               data-nickname="ปุณณ์"
+               data-fullname="ธีระเศรษฐ์ อุ่นต๊ะ"
+               data-position="รองประธานนักเรียน"
+               data-birthday="04/05/2553"
+               data-class="SMTE"
+               data-ig="pxn_t.u"
+               data-photo="image/member/ปุณณ์.jpg">
+            <div class="member-card__badge">รองประธานนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ปุณณ์.jpg" alt="รองประธาน" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ปุณณ์</h3>
+              <p class="member-card__fullname">ธีระเศรษฐ์ อุ่นต๊ะ</p>
+              <a class="member-card__ig" href="https://www.instagram.com/pxn_t.u/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @pxn_t.u
+              </a>
+            </div>
+          </div>
+
+          <div class="member-card member-card--vice"
+               data-nickname="ก้อนเมฆ"
+               data-fullname="สายลม พุ่มพวง"
+               data-position="รองประธานนักเรียน"
+               data-birthday="30/05/2552"
+               data-class="SMC"
+               data-ig="gon.mekkk"
+               data-photo="image/member/ก้อนเมฆ.jpg">
+            <div class="member-card__badge">รองประธานนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ก้อนเมฆ.jpg" alt="รองประธาน" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ก้อนเมฆ</h3>
+              <p class="member-card__fullname">สายลม พุ่มพวง</p>
+              <a class="member-card__ig" href="https://www.instagram.com/gon.mekkk/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @gon.mekkk
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- คณะกรรมการ -->
+        <h3 class="members-group-title">คณะกรรมการนักเรียน</h3>
+        <div class="members-grid members-grid--4">
+          <!-- สมาชิกคนที่ 4 -->
+          <div class="member-card member-card--committee"
+               data-nickname="โย"
+               data-fullname="ณัฐนันท์ บุญชุ่ม"
+               data-position="กรรมการนักเรียน"
+               data-birthday="05/10/2552"
+               data-class="SMTP"
+               data-ig="egoissoy"
+               data-photo="image/member/โย.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/โย.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">โย</h3>
+              <p class="member-card__fullname">ณัฐนันท์ บุญชุ่ม</p>
+              <a class="member-card__ig" href="https://instagram.com/egoissoy" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @egoissoy
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 5 -->
+          <div class="member-card member-card--committee"
+               data-nickname="เบ้บ"
+               data-fullname="พรพรรณ แช่มชื่น"
+               data-position="กรรมการนักเรียน"
+               data-birthday="25/02/52"
+               data-class="SMTE"
+               data-ig="sheamu.hq"
+               data-photo="image/member/เบ้บ.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/เบ้บ.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">เบ้บ</h3>
+              <p class="member-card__fullname">พรพรรณ แช่มชื่น</p>
+              <a class="member-card__ig" href="https://instagram.com/sheamu.hq" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @sheamu.hq
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 6 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ก๋อง"
+               data-fullname="วิยะดา บูชาวัง"
+               data-position="กรรมการนักเรียน"
+               data-birthday="09/07/2552"
+               data-class="SMTP"
+               data-ig="urg1nny"
+               data-photo="image/member/ก๋อง.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ก๋อง.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ก๋อง</h3>
+              <p class="member-card__fullname">วิยะดา บูชาวัง</p>
+              <a class="member-card__ig" href="https://instagram.com/urg1nny" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @urg1nny
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 7 -->
+          <div class="member-card member-card--committee"
+               data-nickname="แป้ง"
+               data-fullname="ชญาดา สอนทุ่ง"
+               data-position="กรรมการนักเรียน"
+               data-birthday="17/04/2553"
+               data-class="SMTP"
+               data-ig="pi9ohk"
+               data-photo="image/member/แป้ง.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/แป้ง.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">แป้ง</h3>
+              <p class="member-card__fullname">ชญาดา สอนทุ่ง</p>
+              <a class="member-card__ig" href="https://instagram.com/pi9ohk" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @pi9ohk
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 8 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ปอย"
+               data-fullname="ปทิตตา ฉัตรเงิน"
+               data-position="กรรมการนักเรียน"
+               data-birthday="11/4/53"
+               data-class="วิท-คณิต"
+               data-ig="pxtitaa.q"
+               data-photo="image/member/ปอย.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ปอย.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ปอย</h3>
+              <p class="member-card__fullname">ปทิตตา ฉัตรเงิน</p>
+              <a class="member-card__ig" href="https://instagram.com/pxtitaa.q" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @pxtitaa.q
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 9 -->
+          <div class="member-card member-card--committee"
+               data-nickname="มิก"
+               data-fullname="พิมผกา พุฒธรรม"
+               data-position="กรรมการนักเรียน"
+               data-birthday="06/08/2552"
+               data-class="smc"
+               data-ig="P.himphaka"
+               data-photo="image/member/มิก.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/มิก.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">มิก</h3>
+              <p class="member-card__fullname">พิมผกา พุฒธรรม</p>
+              <a class="member-card__ig" href="https://instagram.com/P.himphaka" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @P.himphaka
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 10 -->
+          <div class="member-card member-card--committee"
+               data-nickname="จ๋า"
+               data-fullname="ธยานี ผายวัฒน์"
+               data-position="กรรมการนักเรียน"
+               data-birthday="03/06/2552"
+               data-class="วิทย์-คณิต"
+               data-ig="tynzxy_09"
+               data-photo="image/member/จ๋า.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/จ๋า.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">จ๋า</h3>
+              <p class="member-card__fullname">ธยานี ผายวัฒน์</p>
+              <a class="member-card__ig" href="https://instagram.com/tynzxy_09" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @tynzxy_09
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 11 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ต้นข้าว"
+               data-fullname="ศุภาวรรณ อยู่ทอง"
+               data-position="กรรมการนักเรียน"
+               data-birthday="11/11/2552"
+               data-class="วิทย์-คณิต"
+               data-ig="Sxp_t"
+               data-photo="image/member/ต้นข้าว.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ต้นข้าว.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ต้นข้าว</h3>
+              <p class="member-card__fullname">ศุภาวรรณ อยู่ทอง</p>
+              <a class="member-card__ig" href="https://instagram.com/Sxp_t" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @Sxp_t
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 12 -->
+          <div class="member-card member-card--committee"
+               data-nickname="หนูดี"
+               data-fullname="เจริญศุข ดีสาร"
+               data-position="กรรมการนักเรียน"
+               data-birthday="09/06/2552"
+               data-class="ภาษาฝรั่งเศส"
+               data-ig="nodez_xr09"
+               data-photo="image/member/หนูดี.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/หนูดี.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">หนูดี</h3>
+              <p class="member-card__fullname">เจริญศุข ดีสาร</p>
+              <a class="member-card__ig" href="https://instagram.com/nodez_xr09" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @nodez_xr09
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 13 -->
+          <div class="member-card member-card--committee"
+               data-nickname="กาฟิว"
+               data-fullname="พิชชาภา พุฒจาด"
+               data-position="กรรมการนักเรียน"
+               data-birthday="24/08/2552"
+               data-class="ศิลป์ญี่ปุ่น"
+               data-ig="anyoneemi"
+               data-photo="image/member/กาฟิว.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/กาฟิว.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">กาฟิว</h3>
+              <p class="member-card__fullname">พิชชาภา พุฒจาด</p>
+              <a class="member-card__ig" href="https://instagram.com/anyoneemi" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @anyoneemi
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 14 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ออมสิน"
+               data-fullname="อนัญญา นุ้ยเงิน"
+               data-position="กรรมการนักเรียน"
+               data-birthday="01/11/2552"
+               data-class="ศิลป์ภาษาญี่ปุ่น"
+               data-ig="9ourselves"
+               data-photo="image/member/ออมสิน.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ออมสิน.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ออมสิน</h3>
+              <p class="member-card__fullname">อนัญญา นุ้ยเงิน</p>
+              <a class="member-card__ig" href="https://instagram.com/9ourselves" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @9ourselves
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 15 -->
+          <div class="member-card member-card--committee"
+               data-nickname="กั๊ก"
+               data-fullname="ณิชานันท์ คำสัตย์"
+               data-position="กรรมการนักเรียน"
+               data-birthday="12/07/2552"
+               data-class="ศิลป์จีน"
+               data-ig="nichanan_kak"
+               data-photo="image/member/กั๊ก.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/กั๊ก.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">กั๊ก</h3>
+              <p class="member-card__fullname">ณิชานันท์ คำสัตย์</p>
+              <a class="member-card__ig" href="https://instagram.com/nichanan_kak" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @nichanan_kak
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 16 -->
+          <div class="member-card member-card--committee"
+               data-nickname="กาย"
+               data-fullname="สิรภพ ปัญญาติ๊บ"
+               data-position="กรรมการนักเรียน"
+               data-birthday="17/12/52"
+               data-class="EMP"
+               data-ig="0.sp_guy.0"
+               data-photo="image/member/กาย.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/กาย.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">กาย</h3>
+              <p class="member-card__fullname">สิรภพ ปัญญาติ๊บ</p>
+              <a class="member-card__ig" href="https://instagram.com/0.sp_guy.0" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @0.sp_guy.0
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 17 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ฮาชิ"
+               data-fullname="อชิรากรณ์ สันติเจริญผล"
+               data-position="กรรมการนักเรียน"
+               data-birthday="08/07/2552"
+               data-class="นิติศาสตร์ รัฐศาสตร์"
+               data-ig="vintages.camera"
+               data-photo="image/member/ฮาชิ.jpg">
+               <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ฮาชิ.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ฮาชิ</h3>
+              <p class="member-card__fullname">อชิรากรณ์ สันติเจริญผล</p>
+              <a class="member-card__ig" href="https://instagram.com/vintages.camera" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @vintages.camera
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 18 -->
+          <div class="member-card member-card--committee"
+               data-nickname="สกาย"
+               data-fullname="กล้าภวิษย์ ดำดี"
+               data-position="กรรมการนักเรียน"
+               data-birthday="13/05/2553"
+               data-class="EMP"
+               data-ig="Skyzuza007"
+               data-photo="image/member/สกาย.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/สกาย.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">สกาย</h3>
+              <p class="member-card__fullname">กล้าภวิษย์ ดำดี</p>
+              <a class="member-card__ig" href="https://instagram.com/Skyzuza007" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @Skyzuza007
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 19 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ดีไซน์"
+               data-fullname="ธนัทเทพ ช่างหิรัญ"
+               data-position="กรรมการนักเรียน"
+               data-birthday="06/10/2552"
+               data-class="SMTE"
+               data-ig="dababeb0y"
+               data-photo="image/member/ดีไซน์.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ดีไซน์.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ดีไซน์</h3>
+              <p class="member-card__fullname">ธนัทเทพ ช่างหิรัญ</p>
+              <a class="member-card__ig" href="https://instagram.com/dababeb0y" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @dababeb0y
+              </a>
+            </div>
+          </div>
+
+          <!-- สมาชิกคนที่ 20 -->
+          <div class="member-card member-card--committee"
+               data-nickname="ฮิวโก้"
+               data-fullname="พงศกร จิตอนุกูล"
+               data-position="กรรมการนักเรียน"
+               data-birthday="18/06/2552"
+               data-class="SMTP"
+               data-ig="_phongsakon_"
+               data-photo="image/member/ฮิวโก้.jpg">
+            <div class="member-card__badge">คณะกรรมการนักเรียน</div>
+            <div class="member-card__photo">
+              <img src="image/member/ฮิวโก้.jpg" alt="กรรมการ" onerror="this.style.display='none'" />
+              <div class="member-card__photo-placeholder">👤</div>
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__nickname">ฮิวโก้</h3>
+              <p class="member-card__fullname">พงศกร จิตอนุกูล</p>
+              <a class="member-card__ig" href="https://www.instagram.com/_phongsakon__/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <span class="ig-icon">📷</span> @_phongsakon__
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="member-modal" id="member-modal">
+      <div class="member-modal__overlay"></div>
+      <div class="member-modal__content">
+        <button class="member-modal__close" aria-label="ปิด">&times;</button>
+        <div class="member-modal__photo">
+          <img id="modal-photo" src="" alt="" />
+        </div>
+        <div class="member-modal__info">
+          <span class="member-modal__badge" id="modal-badge"></span>
+          <h3 class="member-modal__nickname" id="modal-nickname"></h3>
+          <p class="member-modal__fullname" id="modal-fullname"></p>
+          <div class="member-modal__details">
+            <div class="member-modal__detail">
+              <span class="detail-icon">🎂</span>
+              <span class="detail-label">วันเกิด</span>
+              <span class="detail-value" id="modal-birthday"></span>
+            </div>
+            <div class="member-modal__detail">
+              <span class="detail-icon">🏫</span>
+              <span class="detail-label">สายการเรียน</span>
+              <span class="detail-value" id="modal-class"></span>
+            </div>
+          </div>
+          <a class="member-modal__ig" id="modal-ig" href="" target="_blank" rel="noopener">
+            <span class="ig-icon">📷</span> <span id="modal-ig-text"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+        Copyright © 2026 UDDoubleDee. Student Council Udomdarunee School.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/member-modal.js"></script>
+    <script src="js/loader.js"></script>
+  </body>
+</html>
