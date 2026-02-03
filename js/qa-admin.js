@@ -1,117 +1,74 @@
 /**
- * Q&A Admin Page Functionality
- * ระบบจัดการและตอบคำถาม พร้อมลบคำถาม
- * รองรับทั้ง localStorage และ Backend API
+ * Q&A Admin Page (Cloudflare Worker Version)
+ * - ทุกเครื่องเข้าได้
+ * - ใส่รหัสถูกถึงจะบันทึกได้
+ * - ข้อมูลกลางอยู่ที่ Cloudflare Worker
  */
 (function () {
+  // ==================== CONFIG ====================
+  const API_URL = "https://qa-api.demakpai555.workers.dev"; // <-- URL Worker
+  const ADMIN_PASSWORD = "udkubnonh";     // <-- รหัส admin
+
+  // ==================== ELEMENTS ====================
   var adminList = document.getElementById("qa-admin-list");
   var emptyMessage = document.getElementById("qa-admin-empty");
+
   var filterButtons = document.querySelectorAll(".qa-filter__btn");
+
   var answerModal = document.getElementById("answer-modal");
   var modalCloseBtn = document.getElementById("answer-modal-close");
   var cancelBtn = document.getElementById("answer-cancel");
   var saveBtn = document.getElementById("answer-save");
   var deleteBtn = document.getElementById("answer-delete");
+
   var authModal = document.getElementById("admin-auth");
   var authForm = document.getElementById("admin-auth-form");
   var authInput = document.getElementById("admin-auth-password");
   var authError = document.getElementById("admin-auth-error");
-  var logoutBtn = document.getElementById("admin-logout");
 
+  // ==================== STATE ====================
+  var questions = [];
+  var currentQuestion = null;
   var currentFilter = "all";
-  var currentQuestionId = null;
-  
-  // Check if using backend API
-  var useAPI = true;
-  var apiURL = "https://qa-api.demakpai555.workers.dev";
+  var isAuthed = false;
 
+  // ==================== AUTH ====================
   function showAuth(message) {
-    if (authError) {
-      authError.textContent = message || "";
-    }
-    if (authModal) {
-      authModal.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
+    if (authError) authError.textContent = message || "";
+    authModal.classList.add("active");
+    document.body.style.overflow = "hidden";
   }
 
   function hideAuth() {
-    if (authModal) {
-      authModal.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-    if (authError) {
-      authError.textContent = "";
-    }
+    authModal.classList.remove("active");
+    document.body.style.overflow = "";
+    if (authError) authError.textContent = "";
   }
 
-  // ==================== API Functions ====================
-  async function getQuestionsAPI() {
+  // ==================== API ====================
+  async function loadQuestions() {
     try {
-      var token = getAdminToken();
-      if (!token) {
-        showAuth("กรุณากรอกรหัสผ่านเพื่อเข้าใช้งาน");
-        return [];
-      }
-      var response = await fetch(apiURL + '/api/questions', {
-        headers: { "X-Admin-Token": token }
-      });
-      if (response.status === 401 || response.status === 403) {
-        setAdminToken("");
-        showAuth("รหัสผ่านไม่ถูกต้องหรือหมดอายุ");
-        return [];
-      }
-      var result = await response.json();
-      return result.success ? result.data : [];
-    } catch (error) {
-      console.error('API Error:', error);
-      }
-      return [];
+      const res = await fetch(API_URL);
+      questions = await res.json();
+      renderAdminList();
+    } catch (err) {
+      alert("โหลดข้อมูลไม่สำเร็จ");
     }
   }
 
-  // ==================== Unified Functions ====================
-  async function getQuestions() {
-    if (useAPI) {
-      return await getQuestionsAPI();
-    } else {
-      return getQuestionsLocal();
-    }
+  async function saveAllQuestions() {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: ADMIN_PASSWORD,
+        questions: questions
+      })
+    });
+    return res.ok;
   }
 
-  async function updateQuestion(id, answer) {
-    if (useAPI) {
-      return await updateQuestionAPI(id, answer);
-    } else {
-      var questions = getQuestionsLocal();
-      var index = questions.findIndex(q => q.id === id);
-      if (index !== -1) {
-        questions[index].answer = answer;
-        questions[index].status = 'answered';
-        questions[index].answeredDate = new Date().toISOString();
-        saveQuestionsLocal(questions);
-        return true;
-      }
-      return false;
-    }
-  }
-
-  async function deleteQuestion(id) {
-    if (useAPI) {
-      return await deleteQuestionAPI(id);
-    } else {
-      var questions = getQuestionsLocal();
-      var index = questions.findIndex(q => q.id === id);
-      if (index !== -1) {
-        questions.splice(index, 1);
-        saveQuestionsLocal(questions);
-        return true;
-      }
-      return false;
-    }
-  }
-
-  // ==================== Helper Functions ====================
+  // ==================== HELPERS ====================
   function formatDate(dateString) {
     var date = new Date(dateString);
     var day = date.getDate();
@@ -119,7 +76,7 @@
     var year = date.getFullYear() + 543;
     var hours = date.getHours().toString().padStart(2, "0");
     var minutes = date.getMinutes().toString().padStart(2, "0");
-    return day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
   function escapeHtml(text) {
@@ -128,87 +85,56 @@
     return div.innerHTML;
   }
 
-  function filterQuestions(questions) {
-    if (currentFilter === "all") {
-      return questions;
-    }
-    return questions.filter(function (q) {
-      return q.status === currentFilter;
-    });
+  function filteredQuestions() {
+    if (currentFilter === "all") return questions;
+    return questions.filter(q => q.status === currentFilter);
   }
 
-  // ==================== Render Functions ====================
-  async function renderAdminList() {
-    var allowed = await ensureAuth();
-    if (!allowed) {
-      return;
-    }
-    hideAuth();
-    var questions = await getQuestions();
-    var filteredQuestions = filterQuestions(questions);
+  // ==================== RENDER ====================
+  function renderAdminList() {
+    if (!isAuthed) return;
 
-    if (filteredQuestions.length === 0) {
+    var list = filteredQuestions();
+
+    if (list.length === 0) {
       adminList.innerHTML = "";
       emptyMessage.style.display = "block";
       return;
     }
 
     emptyMessage.style.display = "none";
-    adminList.innerHTML = filteredQuestions
-      .map(function (q) {
-        var statusClass = q.status === "answered" ? "status-dot--answered" : "status-dot--pending";
-        return (
-          '<div class="qa-admin-card" data-id="' + q.id + '">' +
-          '<div class="qa-admin-card__status">' +
-          '<span class="status-dot ' + statusClass + '"></span>' +
-          "</div>" +
-          '<div class="qa-admin-card__content">' +
-          '<div class="qa-admin-card__header">' +
-          '<span class="qa-admin-card__category">' + escapeHtml(q.category) + "</span>" +
-          '<span class="qa-admin-card__date">' + formatDate(q.date) + "</span>" +
-          "</div>" +
-          '<p class="qa-admin-card__question">' + escapeHtml(q.question) + "</p>" +
-          '<p class="qa-admin-card__author">จาก: ' + escapeHtml(q.name) + "</p>" +
-          "</div>" +
-          "</div>"
-        );
-      })
-      .join("");
+    adminList.innerHTML = list.map(q => {
+      return `
+        <div class="qa-admin-card" data-id="${q.id}">
+          <div class="qa-admin-card__content">
+            <span class="qa-admin-card__category">${escapeHtml(q.category)}</span>
+            <span class="qa-admin-card__date">${formatDate(q.date)}</span>
+            <p class="qa-admin-card__question">${escapeHtml(q.question)}</p>
+            <p class="qa-admin-card__author">จาก: ${escapeHtml(q.name)}</p>
+          </div>
+        </div>
+      `;
+    }).join("");
 
-    // Add click handlers
-    var cards = adminList.querySelectorAll(".qa-admin-card");
-    cards.forEach(function (card) {
-      card.addEventListener("click", function () {
-        var id = parseInt(card.dataset.id);
-        openAnswerModal(id);
+    adminList.querySelectorAll(".qa-admin-card").forEach(card => {
+      card.addEventListener("click", () => {
+        openAnswerModal(Number(card.dataset.id));
       });
     });
   }
 
-  // ==================== Modal Functions ====================
-  var currentQuestion = null;
+  // ==================== MODAL ====================
+  function openAnswerModal(id) {
+    currentQuestion = questions.find(q => q.id === id);
+    if (!currentQuestion) return;
 
-  async function openAnswerModal(questionId) {
-    var questions = await getQuestions();
-    var question = questions.find(function (q) {
-      return q.id === questionId;
-    });
+    document.getElementById("modal-category").textContent = currentQuestion.category;
+    document.getElementById("modal-date").textContent = formatDate(currentQuestion.date);
+    document.getElementById("modal-author").textContent = currentQuestion.name;
+    document.getElementById("modal-question").textContent = currentQuestion.question;
+    document.getElementById("modal-answer").value = currentQuestion.answer || "";
 
-    if (!question) return;
-
-    currentQuestionId = questionId;
-    currentQuestion = question;
-
-    document.getElementById("modal-category").textContent = question.category;
-    document.getElementById("modal-date").textContent = formatDate(question.date);
-    document.getElementById("modal-author").textContent = question.name;
-    document.getElementById("modal-question").textContent = question.question;
-    document.getElementById("modal-answer").value = question.answer || "";
-
-    // Show/hide delete button based on status
-    if (deleteBtn) {
-      deleteBtn.style.display = question.status === 'answered' ? 'block' : 'none';
-    }
+    deleteBtn.style.display = currentQuestion.status === "answered" ? "block" : "none";
 
     answerModal.classList.add("active");
     document.body.style.overflow = "hidden";
@@ -217,125 +143,86 @@
   function closeAnswerModal() {
     answerModal.classList.remove("active");
     document.body.style.overflow = "";
-    currentQuestionId = null;
     currentQuestion = null;
   }
 
-  // ==================== Event Handlers ====================
+  // ==================== ACTIONS ====================
   async function saveAnswer() {
-    if (currentQuestionId === null) return;
-
     var answerText = document.getElementById("modal-answer").value.trim();
     if (!answerText) {
       alert("กรุณาพิมพ์คำตอบ");
       return;
     }
 
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'กำลังบันทึก...';
+    currentQuestion.answer = answerText;
+    currentQuestion.status = "answered";
 
-    var success = await updateQuestion(currentQuestionId, answerText);
+    saveBtn.disabled = true;
+    saveBtn.textContent = "กำลังบันทึก...";
+
+    var ok = await saveAllQuestions();
 
     saveBtn.disabled = false;
-    saveBtn.textContent = 'บันทึกคำตอบ';
+    saveBtn.textContent = "บันทึกคำตอบ";
 
-    if (success) {
+    if (ok) {
       closeAnswerModal();
       renderAdminList();
     } else {
-      alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      alert("รหัสผ่านไม่ถูกต้อง หรือบันทึกไม่สำเร็จ");
     }
   }
 
-  async function handleDelete() {
-    if (currentQuestionId === null) return;
+  async function deleteQuestion() {
+    if (!confirm("คุณต้องการลบคำถามนี้หรือไม่?")) return;
 
-    if (!confirm("คุณต้องการลบคำถามนี้หรือไม่?")) {
-      return;
-    }
+    questions = questions.filter(q => q !== currentQuestion);
 
     deleteBtn.disabled = true;
-    deleteBtn.textContent = 'กำลังลบ...';
+    deleteBtn.textContent = "กำลังลบ...";
 
-    var success = await deleteQuestion(currentQuestionId);
+    var ok = await saveAllQuestions();
 
     deleteBtn.disabled = false;
-    deleteBtn.textContent = 'ลบคำถาม';
+    deleteBtn.textContent = "ลบคำถาม";
 
-    if (success) {
+    if (ok) {
       closeAnswerModal();
       renderAdminList();
     } else {
-      alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      alert("ลบไม่สำเร็จ");
     }
   }
 
-  // Filter button handlers
-  filterButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      filterButtons.forEach(function (b) {
-        b.classList.remove("qa-filter__btn--active");
-      });
+  // ==================== EVENTS ====================
+  if (authForm) {
+    authForm.addEventListener("submit", e => {
+      e.preventDefault();
+      var password = authInput.value.trim();
+      if (password !== ADMIN_PASSWORD) {
+        showAuth("รหัสผ่านไม่ถูกต้อง");
+        return;
+      }
+      isAuthed = true;
+      hideAuth();
+      loadQuestions();
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("qa-filter__btn--active"));
       btn.classList.add("qa-filter__btn--active");
       currentFilter = btn.dataset.filter;
       renderAdminList();
     });
   });
 
-  // Modal handlers
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", closeAnswerModal);
-  }
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeAnswerModal);
+  if (cancelBtn) cancelBtn.addEventListener("click", closeAnswerModal);
+  if (saveBtn) saveBtn.addEventListener("click", saveAnswer);
+  if (deleteBtn) deleteBtn.addEventListener("click", deleteQuestion);
 
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", closeAnswerModal);
-  }
-
-  if (saveBtn) {
-    saveBtn.addEventListener("click", saveAnswer);
-  }
-
-  if (deleteBtn) {
-    deleteBtn.addEventListener("click", handleDelete);
-  }
-
-  if (answerModal) {
-    answerModal.querySelector(".qa-modal__overlay").addEventListener("click", closeAnswerModal);
-  }
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && answerModal && answerModal.classList.contains("active")) {
-      closeAnswerModal();
-    }
-  });
-
-  if (authForm) {
-    authForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      var password = authInput ? authInput.value.trim() : "";
-      if (!password) {
-        showAuth("กรุณากรอกรหัสผ่าน");
-        return;
-      }
-      var ok = await validateToken(password);
-      if (ok) {
-        setAdminToken(password);
-        if (authInput) authInput.value = "";
-        hideAuth();
-        renderAdminList();
-      } else {
-        showAuth("รหัสผ่านไม่ถูกต้อง");
-      }
-    });
-  }
-
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", function () {
-      setAdminToken("");
-      showAuth("ออกจากระบบแล้ว กรุณาเข้าสู่ระบบใหม่");
-    });
-  }
-
-  // Initial render
-  renderAdminList();
+  // ==================== INIT ====================
+  showAuth("กรุณากรอกรหัสผ่านเพื่อเข้าใช้งาน");
 })();
