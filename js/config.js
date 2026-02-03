@@ -12,15 +12,8 @@ var __isLocalFile = typeof location !== "undefined" && location.protocol === "fi
 var __isLocalhost = typeof location !== "undefined" && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
 
 var QA_CONFIG = {
-  // ถ้าอยู่บน Cloudflare Pages จะใช้ same-origin อัตโนมัติ
-  // ถ้าเปิดแบบ file:// หรือ localhost (เช่น Live Server) จะไม่เรียก API
-  API_URL: (__isLocalFile || __isLocalhost) ? "" : (location ? location.origin : ""),
-  
-  // ถ้าอยู่บนเครื่องตัวเอง ให้ใช้ localStorage ชั่วคราวเพื่อทดสอบได้
-  // เมื่อขึ้น Cloudflare Pages ให้ใช้ false เพื่อให้ทุกเครื่องเห็นข้อมูลเดียวกัน
-  USE_LOCAL_STORAGE: (__isLocalFile || __isLocalhost),
-
-  // รหัสผ่านสำหรับหน้า Q&A Admin (ใช้เมื่อไม่มี backend / localStorage เท่านั้น)
-  // แนะนำให้เปลี่ยนเป็นรหัสของคุณเอง
-  ADMIN_PASSWORD: 'change-me'
+  var QA_CONFIG = {
+  API_URL: "https://qa-api.demakpai555.workers.dev",
+  USE_LOCAL_STORAGE: false
+  ADMIN_PASSWORD: 'udkubnong'
 };
