@@ -16,7 +16,7 @@
   var formModalCloseBtn = document.getElementById("form-modal-close");
 
   // Check if using backend API
-  var useAPI = typeof QA_CONFIG !== 'undefined' && QA_CONFIG.API_URL && QA_CONFIG.API_URL.length > 0;
+  var useAPI = true;
   var apiURL = useAPI ? QA_CONFIG.API_URL : '';
 
   // ==================== localStorage Functions ====================
@@ -31,8 +31,8 @@
 
   // ==================== API Functions ====================
   async function getQuestionsAPI() {
-    try {
-      var response = await fetch(apiURL + '/api/questions/answered');
+  try {
+    var response = await fetch(apiURL);
       var result = await response.json();
       return result.success ? result.data : [];
     } catch (error) {
