@@ -20,23 +20,10 @@
 
   var currentFilter = "all";
   var currentQuestionId = null;
-  var adminTokenKey = "qa_admin_token";
-
+  
   // Check if using backend API
-  var useAPI = typeof QA_CONFIG !== 'undefined' && QA_CONFIG.API_URL && QA_CONFIG.API_URL.length > 0;
-  var apiURL = useAPI ? QA_CONFIG.API_URL : '';
-
-  function getAdminToken() {
-    return sessionStorage.getItem(adminTokenKey) || "";
-  }
-
-  function setAdminToken(token) {
-    if (token) {
-      sessionStorage.setItem(adminTokenKey, token);
-    } else {
-      sessionStorage.removeItem(adminTokenKey);
-    }
-  }
+  var useAPI = true;
+  var apiURL = "https://qa-api.demakpai555.workers.dev";
 
   function showAuth(message) {
     if (authError) {
@@ -56,55 +43,6 @@
     if (authError) {
       authError.textContent = "";
     }
-  }
-
-  async function validateToken(token) {
-    if (!token) return false;
-    if (useAPI) {
-      try {
-        var response = await fetch(apiURL + "/api/questions", {
-          headers: { "X-Admin-Token": token }
-        });
-        if (!response.ok) return false;
-        var result = await response.json();
-        return result && result.success;
-      } catch (error) {
-        console.error("API Error:", error);
-        return false;
-      }
-    }
-    if (typeof QA_CONFIG === "undefined" || !QA_CONFIG.ADMIN_PASSWORD) {
-      return false;
-    }
-    return token === QA_CONFIG.ADMIN_PASSWORD;
-  }
-
-  async function ensureAuth() {
-    var token = getAdminToken();
-    if (!token) {
-      showAuth("กรุณากรอกรหัสผ่านเพื่อเข้าใช้งาน");
-      return false;
-    }
-    if (!useAPI && (typeof QA_CONFIG === "undefined" || !QA_CONFIG.ADMIN_PASSWORD)) {
-      showAuth("กรุณาตั้งค่า ADMIN_PASSWORD ในไฟล์ config.js");
-      return false;
-    }
-    if (!useAPI && token !== QA_CONFIG.ADMIN_PASSWORD) {
-      setAdminToken("");
-      showAuth("รหัสผ่านไม่ถูกต้อง");
-      return false;
-    }
-    return true;
-  }
-
-  // ==================== localStorage Functions ====================
-  function getQuestionsLocal() {
-    var questions = localStorage.getItem("qa_questions");
-    return questions ? JSON.parse(questions) : [];
-  }
-
-  function saveQuestionsLocal(questions) {
-    localStorage.setItem("qa_questions", JSON.stringify(questions));
   }
 
   // ==================== API Functions ====================
@@ -127,73 +65,8 @@
       return result.success ? result.data : [];
     } catch (error) {
       console.error('API Error:', error);
-      if (typeof QA_CONFIG !== "undefined" && QA_CONFIG.USE_LOCAL_STORAGE) {
-        return getQuestionsLocal();
       }
       return [];
-    }
-  }
-
-  async function updateQuestionAPI(id, answer) {
-    try {
-      var token = getAdminToken();
-      var response = await fetch(apiURL + '/api/questions/' + id, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', "X-Admin-Token": token },
-        body: JSON.stringify({ answer })
-      });
-      if (response.status === 401 || response.status === 403) {
-        setAdminToken("");
-        showAuth("รหัสผ่านไม่ถูกต้องหรือหมดอายุ");
-        return false;
-      }
-      var result = await response.json();
-      return result.success;
-    } catch (error) {
-      console.error('API Error:', error);
-      if (typeof QA_CONFIG !== "undefined" && QA_CONFIG.USE_LOCAL_STORAGE) {
-        // Fallback to localStorage
-        var questions = getQuestionsLocal();
-        var index = questions.findIndex(q => q.id === id);
-        if (index !== -1) {
-          questions[index].answer = answer;
-          questions[index].status = 'answered';
-          questions[index].answeredDate = new Date().toISOString();
-          saveQuestionsLocal(questions);
-        }
-        return true;
-      }
-      return false;
-    }
-  }
-
-  async function deleteQuestionAPI(id) {
-    try {
-      var token = getAdminToken();
-      var response = await fetch(apiURL + '/api/questions/' + id, {
-        method: 'DELETE',
-        headers: { "X-Admin-Token": token }
-      });
-      if (response.status === 401 || response.status === 403) {
-        setAdminToken("");
-        showAuth("รหัสผ่านไม่ถูกต้องหรือหมดอายุ");
-        return false;
-      }
-      var result = await response.json();
-      return result.success;
-    } catch (error) {
-      console.error('API Error:', error);
-      if (typeof QA_CONFIG !== "undefined" && QA_CONFIG.USE_LOCAL_STORAGE) {
-        // Fallback to localStorage
-        var questions = getQuestionsLocal();
-        var index = questions.findIndex(q => q.id === id);
-        if (index !== -1) {
-          questions.splice(index, 1);
-          saveQuestionsLocal(questions);
-        }
-        return true;
-      }
-      return false;
     }
   }
 
