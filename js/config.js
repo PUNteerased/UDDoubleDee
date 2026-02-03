@@ -12,7 +12,6 @@ var __isLocalFile = typeof location !== "undefined" && location.protocol === "fi
 var __isLocalhost = typeof location !== "undefined" && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
 
 var QA_CONFIG = {
-  var QA_CONFIG = {
   API_URL: "https://qa-api.demakpai555.workers.dev",
   USE_LOCAL_STORAGE: false
   ADMIN_PASSWORD: 'udkubnong'
