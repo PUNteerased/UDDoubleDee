@@ -7,7 +7,7 @@
 (function () {
   // ==================== CONFIG ====================
   const API_URL = "https://qa-api.demakpai555.workers.dev"; // <-- URL Worker
-  const ADMIN_PASSWORD = "udkubnonh";     // <-- รหัส admin
+  const ADMIN_PASSWORD = "udkubnong";     // <-- รหัส admin
 
   // ==================== ELEMENTS ====================
   var adminList = document.getElementById("qa-admin-list");
